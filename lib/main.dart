@@ -23,9 +23,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightBlue
       ),
-      routes: {
-        '/update':(context)=>const UpdateContactPage()
-      },
       home: const Authpage(),
     );
   }
