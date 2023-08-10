@@ -8,8 +8,7 @@ class Authpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: StreamBuilder<User?>(
+    return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context ,AsyncSnapshot<User?>snapshot){
           if(snapshot.connectionState==ConnectionState.waiting){
@@ -22,8 +21,7 @@ class Authpage extends StatelessWidget {
               return const Loginscreen();
             }
           }
-        },
-      ),
+    },
     );
   }
 }

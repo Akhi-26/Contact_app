@@ -1,34 +1,45 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class AddContactPage extends StatelessWidget {
-  const AddContactPage({Key? key}) : super(key: key);
+class UpdateContactPage extends StatelessWidget {
+  const UpdateContactPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+
+
     final CollectionReference user =
-        FirebaseFirestore.instance.collection('User');
+    FirebaseFirestore.instance.collection('User');
 
     final namecontroller = TextEditingController();
     final addresscontroller = TextEditingController();
     final phonenumcontroller = TextEditingController();
     final emailcontroller = TextEditingController();
 
-    void createUser() {
+    updateDonor(docId){
       final data = {
-        'name': namecontroller.text,
-        'phonenumber': phonenumcontroller.text,
-        'email': emailcontroller.text,
-        'address': addresscontroller.text
+        'name':namecontroller.text,
+        'phonenumber':phonenumcontroller.text,
+        'address':addresscontroller.text,
+        'email':emailcontroller.text
       };
-      user.add(data);
+      user.doc(docId).update(data);
     }
+
+    final args = ModalRoute.of(context)!.settings.arguments as Map;
+
+    namecontroller.text=args['name'];
+    addresscontroller.text=args['address'];
+    phonenumcontroller.text=args['phonenumber'];
+    emailcontroller.text=args['email'];
+    final docId=args['id'];
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          "Add Contact",
+          "Update Contact",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
       ),
@@ -86,12 +97,12 @@ class AddContactPage extends StatelessWidget {
           ),
           ElevatedButton(
               onPressed: () {
-                createUser();
+                updateDonor(docId);
                 Navigator.pop(context);
                 // Navigator.pushReplacement(context,
                 //     MaterialPageRoute(builder: (context) => Homescreen()));
               },
-              child: const Text("Submit"))
+              child: const Text("Update"))
         ],
       ),
     );

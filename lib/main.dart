@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:task_1/screens/AddContactPage.dart';
+import 'package:task_1/screens/UpdatePage.dart';
 
 
 import 'Authpage.dart';
@@ -19,8 +21,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.cyan
+        primarySwatch: Colors.lightBlue
       ),
+      routes: {
+        '/update':(context)=>const UpdateContactPage()
+      },
       home: const Authpage(),
     );
   }
